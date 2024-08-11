@@ -3,8 +3,10 @@ import 'components/theme_button.dart';
 import 'components/color_button.dart';
 import 'components/category_card.dart';
 import 'components/post_card.dart';
+import 'components/restaurant_landscape_card.dart';
 import 'models/food_category.dart';
 import 'models/post.dart';
+import 'models/restaurant.dart';
 import 'constants.dart';
 
 class Home extends StatefulWidget {
@@ -59,13 +61,12 @@ class _HomeState extends State<Home> {
           child: PostCard(post: posts[0]),
         ),
       ),
-      Container(
-        color: Colors.green,
+      Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: RestaurantLandscapeCard(restaurant: restaurants[0]),
+        ),
       ),
-      // TODO: Replace with Restaurant Landscape Card
-      Container(
-        color: Colors.blue,
-      )
     ];
 
     return Scaffold(
