@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/restaurant.dart';
 
 class RestaurantLandscapeCard extends StatefulWidget {
@@ -15,7 +16,7 @@ class RestaurantLandscapeCard extends StatefulWidget {
 }
 
 class _RestaurantLandscapeCardState extends State<RestaurantLandscapeCard> {
-  bool _isFavorited = false;
+  bool _isFavourited = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +46,10 @@ class _RestaurantLandscapeCardState extends State<RestaurantLandscapeCard> {
                     child: IconButton(
                       onPressed: () {
                         setState(() {
-                          _isFavorited = !_isFavorited;
+                          _isFavourited = !_isFavourited;
                         });
                       },
-                      icon: Icon(_isFavorited
+                      icon: Icon(_isFavourited
                           ? Icons.favorite
                           : Icons.favorite_border),
                       iconSize: 30.0,

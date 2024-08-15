@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'components/theme_button.dart';
 import 'components/color_button.dart';
-import 'components/category_card.dart';
-import 'components/post_card.dart';
-import 'components/restaurant_landscape_card.dart';
-import 'models/food_category.dart';
-import 'models/post.dart';
-import 'models/restaurant.dart';
+
 import 'constants.dart';
 
 class Home extends StatefulWidget {
@@ -15,11 +11,13 @@ class Home extends StatefulWidget {
     required this.changeTheme,
     required this.changeColor,
     required this.colorSelected,
+    required this.appTitle,
   });
 
   final void Function(bool useLightMode) changeTheme;
   final void Function(int value) changeColor;
   final ColorSelection colorSelected;
+  final String appTitle;
 
   @override
   State<Home> createState() => _HomeState();
@@ -30,41 +28,42 @@ class _HomeState extends State<Home> {
 
   List<NavigationDestination> appBarDestinations = const [
     NavigationDestination(
-      icon: Icon(Icons.credit_card),
-      label: 'Category',
-      selectedIcon: Icon(Icons.credit_card),
+      icon: Icon(Icons.home_outlined),
+      label: 'Explore',
+      selectedIcon: Icon(Icons.home),
     ),
     NavigationDestination(
-      icon: Icon(Icons.credit_card),
-      label: 'Post',
-      selectedIcon: Icon(Icons.credit_card),
+      icon: Icon(Icons.list_outlined),
+      label: 'Orders',
+      selectedIcon: Icon(Icons.list),
     ),
     NavigationDestination(
-      icon: Icon(Icons.credit_card),
-      label: 'Restaurant',
-      selectedIcon: Icon(Icons.credit_card),
+      icon: Icon(Icons.person_2_outlined),
+      label: 'Account',
+      selectedIcon: Icon(Icons.person),
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
     final pages = [
-      Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 300),
-          child: CategoryCard(category: categories[0]),
+      // TODO: Replace with ExplorePage
+      const Center(
+        child: Text(
+          'Explore Page',
+          style: TextStyle(fontSize: 32.0),
         ),
       ),
-      Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: PostCard(post: posts[0]),
+      const Center(
+        child: Text(
+          'Order Page',
+          style: TextStyle(fontSize: 32.0),
         ),
       ),
-      Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: RestaurantLandscapeCard(restaurant: restaurants[0]),
+      const Center(
+        child: Text(
+          'Account Page',
+          style: TextStyle(fontSize: 32.0),
         ),
       ),
     ];
@@ -72,7 +71,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         elevation: 4.0,
-        backgroundColor: Theme.of(context).colorScheme.background,
+        title: Text(widget.appTitle),
+        backgroundColor: Theme.of(context).colorScheme.surface,
         actions: [
           ThemeButton(changeThemeMode: widget.changeTheme),
           ColorButton(
@@ -80,19 +80,10 @@ class _HomeState extends State<Home> {
               colorSelected: widget.colorSelected)
         ],
       ),
-
       body: IndexedStack(
         index: tab,
         children: pages,
       ),
-      // body: Padding(
-      //   padding: const EdgeInsets.all(16.0),
-      //   child: Text(
-      //     'You Hungry?😋',
-      //     style: Theme.of(context).textTheme.displayLarge,
-      //   ),
-      // ),
-
       bottomNavigationBar: NavigationBar(
           selectedIndex: tab,
           onDestinationSelected: (index) {
